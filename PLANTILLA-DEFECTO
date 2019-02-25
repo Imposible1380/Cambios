@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html>
-<html b:css='false' b:responsive='true' b:version='2' expr:dir='data:blog.locale.languageDirection' expr:lang='data:blog.locale.language' prefix='og: http://ogp.me/ns#'>
+<html b:css='false' b:responsive='true' b:version='2' expr:dir='data:blog.locale.languageDirection' expr:lang='data:blog.locale.language' prefix='og: https://ogp.me/ns#' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr'>
 
 <!-- Anime.xml v3.2.0 | Canvas.xml v1.7.0 | github.com/zkreations/canvas.xml -->
 
 <head>
+
 <!-- Basic data -->
 <meta expr:charset='data:blog.encoding'/>
-<meta expr:content='data:view.isHomepage ? "website" : "article"' property='og:type'/>
+<meta expr:content='data:view.isHomepage ? &quot;website&quot; : &quot;article&quot;' property='og:type'/>
 
 <!-- Responsive viewport -->
 <meta content='width=device-width,initial-scale=1' name='viewport'/>
@@ -23,8 +24,29 @@
 <meta content='summary_large_image' name='twitter:card'/>
 
 <!-- favicon -->
-<link expr:href='data:blog.blogspotFaviconUrl' rel='icon' type='image/x-icon'/>
-
+<!-- Multiple favicon sizes for Blogger by zkreations -->
+<b:with value='&quot;https://3.bp.blogspot.com/-6oDjGHeraoM/XHHHNi6ZigI/AAAAAAAAARg/hgp0iysRYfofmU0zeSuElGsKIRWvvKi7QCLcBGAs/s1600/Favicon.png&quot;' var='favicon'>
+   <!-- Apple Touch Icon -->
+   <b:loop values='[57,60,72,76,114,120,144,152,180]' var='sizes'>
+      <link expr:href='resizeImage(data:favicon, data:sizes, &quot;1:1&quot;)' expr:sizes='+(data:sizes,&quot;x&quot;,data:sizes)' rel='apple-touch-icon'/>
+   </b:loop>
+   <!-- Favicon -->
+   <b:loop values='[16,32,48,96]' var='sizes'>
+      <link expr:href='resizeImage(data:favicon, data:sizes, &quot;1:1&quot;)' expr:sizes='+(data:sizes,&quot;x&quot;,data:sizes)' rel='icon' type='image/png'/>
+   </b:loop>
+   <!-- Tiles for IE 11+ on Windows 8.1+ -->
+   <meta content='#ffffff' name='msapplication-TileColor'/>
+   <meta expr:content='resizeImage(data:favicon, 144, &quot;1:1&quot;)' name='msapplication-TileImage'/>
+   <b:loop values='[70,150,310]' var='sizes'>
+      <meta expr:content='resizeImage(data:favicon, data:sizes, &quot;1:1&quot;)' expr:name='+(&quot;msapplication-square&quot;,data:sizes,&quot;x&quot;,data:sizes,&quot;logo&quot;)'/>
+      <b:if cond='data:sizes in {150}'>
+         <meta expr:content='resizeImage(data:favicon, 310, &quot;310:150&quot;)' expr:name='+(&quot;msapplication-wide310x&quot;,data:sizes,&quot;logo&quot;)'/>
+      </b:if>
+   </b:loop>
+</b:with>
+<!-- Chrome Android -->
+<link href='https://rawcdn.githack.com/Imposible1380/JntaiXYZ/f0170ee1ce5e90005a55f2d99219ffcd39b6d8b2/site.webmanifest' rel='manifest'/>
+<meta content='#f5f5f5' name='theme-color'/>
 <!-- Url canonical -->
 <meta expr:content='data:view.url.canonical' property='og:url'/>
 <meta expr:content='data:view.url.canonical' name='twitter:url'/>
@@ -44,9 +66,9 @@
 <!-- Featured Image -->
 <b:if cond='data:view.featuredImage'>
    <meta expr:content='data:view.featuredImage' name='twitter:image'/>
-   <meta expr:content='resizeImage(data:view.featuredImage,1200,"1200:630")' property='og:image'/>
-   <meta property='og:image:width' content="1200"/>
-   <meta property='og:image:height' content="630"/>
+   <meta expr:content='resizeImage(data:view.featuredImage,1200,&quot;1200:630&quot;)' property='og:image'/>
+   <meta content='1200' property='og:image:width'/>
+   <meta content='630' property='og:image:height'/>
 </b:if>
 
 <!-- Title -->
@@ -58,22 +80,22 @@
 
 <!-- Feeds -->
 <b:if cond='data:blog.feedLinks'>
-<b:with value='path(data:blog.homepageUrl.canonical,"feeds/posts/default")' var='feeds'>
-   <link expr:href='data:feeds' title='Atom 1.0' rel='alternate' type='application/atom+xml'/>
-   <link expr:href='data:feeds params {alt: "rss"}' title='RSS 2.0' rel='alternate' type='application/rss+xml'/>
+<b:with value='path(data:blog.homepageUrl.canonical,&quot;feeds/posts/default&quot;)' var='feeds'>
+   <link expr:href='data:feeds' rel='alternate' title='Atom 1.0' type='application/atom+xml'/>
+   <link expr:href='data:feeds params {alt: &quot;rss&quot;}' rel='alternate' title='RSS 2.0' type='application/rss+xml'/>
 </b:with>
 </b:if>
 
 <!-- Sitelinks Searchbox -->
 <script type='application/ld+json'>
 {
-    "@context": "http://schema.org",
-    "@type": "WebSite",
-    "url": "<data:blog.homepageUrl.canonical/>",
-    "potentialAction": {
-        "@type": "SearchAction",
-        "target": "<data:blog.searchUrl/>?q={search_term_string}",
-        "query-input": "required name=search_term_string"
+    &quot;@context&quot;: &quot;http://schema.org&quot;,
+    &quot;@type&quot;: &quot;WebSite&quot;,
+    &quot;url&quot;: &quot;<data:blog.homepageUrl.canonical/>&quot;,
+    &quot;potentialAction&quot;: {
+        &quot;@type&quot;: &quot;SearchAction&quot;,
+        &quot;target&quot;: &quot;<data:blog.searchUrl/>?q={search_term_string}&quot;,
+        &quot;query-input&quot;: &quot;required name=search_term_string&quot;
     }
 }
 </script>
@@ -539,15 +561,15 @@ a {
 }
 /* Button */
 .btn {
-    color: #444444;
-    padding: 1em;
+    color: #fff;
+    padding: 0.8em;
     opacity: 1;
-    transition: opacity .3s;
-    background-color: #f2f2f2;
+    transition: opacity .90;
+    background-color: #bb1919;
 }
 .btn:hover {
-    opacity: .75;
-    color: #444444;
+    color: #bb1919;
+	background-color: #fff;
 }
 .btn[class*='bg-'],
 .btn[class*='skin-bg'] {
@@ -559,16 +581,17 @@ a {
 }
 .btn-border {
     padding: 1em;
-    border: 2px solid rgba(0, 0, 0, 0.1);
-    color: #757575;
-    transition: color .3s, border .3s;
+    background: #bb1919;
+    transition: color .2s, border .2s;
     font-weight: 500;
+	color:#fff;
     line-height: 1;
     display: inline-block;
 }
 .btn-border:hover {
-    border-color: rgba(0, 0, 0, 0.15);
-    color: #262626;
+    border-color: #fff;
+    color: #bb1919;
+    background: #fff;
 }
 /*if => btn is dark*/
 .is-dark .btn:not([class*='skin-bg']):not([class*='bg-']) {
@@ -626,7 +649,7 @@ a {
     opacity: 1;
 }
 .card__title {
-    font-size: 1.6rem;
+    font-size: 19px;
     font-weight: 400;
     margin-bottom: 0;
 }
@@ -818,7 +841,7 @@ a {
 /* Spoiler */
 .wjs-spoiler,
 .accordion-item {
-    margin-bottom: 5px;
+    margin-bottom: 7px;
 }
 .wjs-button,
 .accordion-title {
@@ -981,7 +1004,8 @@ audio {
 }
 /* Background */
 .bg-fern {
-    background-color: #67B36A;
+    padding:3px;
+    background-color: #bb1919;
 }
 .bg-ocean-green {
     background-color: #409C75;
@@ -1016,7 +1040,7 @@ audio {
     margin-bottom: 15px;
 }
 .bottom-space {
-    padding-bottom: 15px;
+    padding-bottom: 0px;
 }
 
 /* Top Search
@@ -1070,6 +1094,7 @@ audio {
 .header {
     position: relative;
     z-index: 100;
+	background: url(https://1.bp.blogspot.com/-GOHuOwArS3I/XHRTi9w7CfI/AAAAAAAAAR8/W-BNb9-lcNEjM7-m5H16mnQIgdvMEkRbQCLcBGAs/s1600/Sin%2Bt%25C3%25ADtulo-11-min.webp);
 }
 .header__logo {
     padding-left: 15px;
@@ -1185,7 +1210,7 @@ audio {
     opacity: 1;
 }
 .slider__container:not(.tns-slider) .slider__item {
-    width: 20%;
+    width: 16%;
     display: inline-block;
 }
 .controls__prev,
@@ -1219,7 +1244,7 @@ audio {
 }
 .footer__widgets .widget:not(:last-child),
 .main .widget:not(:last-child) {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 .header .widget > h2,
 .header .widget-title {
@@ -1366,7 +1391,7 @@ audio {
     padding-bottom: .5rem;
 }
 .card-search__image {
-    width: 60px;
+    width: 100px;
     margin-right: 1rem;
 }
 
@@ -1711,17 +1736,17 @@ blockquote footer::before {
 }
 /*]]>*/</style>
 <b:comment>Bundle (Comments)</b:comment>
-<b:with value='{dir: "//cdn.jsdelivr.net/gh/zkreations/bundle@1/dist/ctms/", theme: data:skin.vars.config_bundle_ctheme}' var='cmts'>
-  <link expr:href='+(data:cmts.dir,"cmts_bundle.min.css")' rel='stylesheet'/>
-  <link expr:href='+(data:cmts.dir,"theme_",data:cmts.theme,".min.css")' rel='stylesheet'/>
+<b:with value='{dir: &quot;//cdn.jsdelivr.net/gh/zkreations/bundle@1/dist/ctms/&quot;, theme: data:skin.vars.config_bundle_ctheme}' var='cmts'>
+  <link expr:href='+(data:cmts.dir,&quot;cmts_bundle.min.css&quot;)' rel='stylesheet'/>
+  <link expr:href='+(data:cmts.dir,&quot;theme_&quot;,data:cmts.theme,&quot;.min.css&quot;)' rel='stylesheet'/>
 </b:with>
 </b:if>
 
 <b:comment>Bundle (Widgets)</b:comment>
 <b:if cond='data:skin.vars.config_bundle'>
-<b:with value='{dir: "//cdn.jsdelivr.net/gh/zkreations/bundle@1/dist/wgts/", theme: data:skin.vars.config_bundle_wtheme}' var='wgts'>
-  <link expr:href='+(data:wgts.dir,"wgts_bundle.min.css")' rel='stylesheet'/>
-  <link expr:href='+(data:wgts.dir,"theme_",data:wgts.theme,".min.css")' rel='stylesheet'/>
+<b:with value='{dir: &quot;//cdn.jsdelivr.net/gh/zkreations/bundle@1/dist/wgts/&quot;, theme: data:skin.vars.config_bundle_wtheme}' var='wgts'>
+  <link expr:href='+(data:wgts.dir,&quot;wgts_bundle.min.css&quot;)' rel='stylesheet'/>
+  <link expr:href='+(data:wgts.dir,&quot;theme_&quot;,data:wgts.theme,&quot;.min.css&quot;)' rel='stylesheet'/>
 </b:with>
 </b:if>
 
@@ -1734,7 +1759,7 @@ blockquote footer::before {
 => Author URI: https://instagram.com/danie.abel
 => Version: 3.2.0
 => License: Creative Commons Atribucion-NoComercial 4.0 Internacional
-=> License URI: http://creativecommons.org/licenses/by-nc/4.0/
+=> License URI: https://creativecommons.org/licenses/by-nc/4.0/
 */
 
 /*Fix: Unnecessary elements removed*/ 
@@ -1766,40 +1791,40 @@ img[data-original-width] {height: auto;}
 /* Configurations
    ====================
    <!-- General Options -->
-   <Variable name="config.comments" description="Comment system" type="string" default="blogger" value="blogger"/>
-   <Variable name="config.shortname" description="Short name of Disqus" type="string" default="shortname" value="shortname"/>
+   <Variable name="config.comments" description="Comment system" type="string" default="disqus" value="disqus"/>
+   <Variable name="config.shortname" description="Short name of Disqus" type="string" default="jntaixyz" value="jntaixyz"/>
    <Variable name="config.dark" description="Main is dark?" type="string" default="false" value="false"/>
-   <Variable name="config.dark.footer" description="Footer is dark?" type="string" default="true" value="true"/>
+   <Variable name="config.dark.footer" description="Footer is dark?" type="string" default="false" value="false"/>
    
    <!-- Admin Options -->
    <Variable name="config.admin.dark" description="Admin is dark?" type="string" default="false" value="false"/>
    <Variable name="config.admin.showInfo" description="Show widget subtitles" type="string" default="false" value="false"/>
 
    <!-- Bundle.css -->
-   <Variable name="config.bundle" description="Bundle.css" type="string" default="false" value="false"/>
+   <Variable name="config.bundle" description="Bundle.css" type="string" default="true" value="true"/>
    <Variable name="config.bundle.wtheme" description="Bundle widget theme" type="string" default="default" value="default"/>
    <Variable name="config.bundle.ctheme" description="Bundle comment theme" type="string" default="anime" value="anime"/>
 
    <!-- Animations (Hover) -->
    <Variable name="config.ta.menu" description="Animation of the main menu" type="string" default="ta-scaleY" value="ta-scaleY"/>
-   <Variable name="config.ta.slider" description="Animation of the slider" type="string" default="ta-default" value="ta-default"/>
+   <Variable name="config.ta.slider" description="Animation of the slider" type="string" default="ta-zoomOut" value="ta-zoomOut"/>
    <Variable name="config.ta.card" description="Animation of the cards" type="string" default="ta-default" value="ta-default"/>
 
    <!-- Cards (Home posts) -->
    <Variable name="config.post.style" description="Home post style" type="string" default="grid" value="grid"/>
-   <Variable name="config.post.column" description="Number of columns" type="string" default="2" value="2"/>
-   <Variable name="config.post.showSnippet" description="Show Snippet" type="string" default="true" value="true"/>
+   <Variable name="config.post.column" description="Number of columns" type="string" default="3" value="3"/>
+   <Variable name="config.post.showSnippet" description="Show Snippet" type="string" default="false" value="false"/>
    <Variable name="config.post.showMeta" description="Show Meta" type="string" default="true" value="true"/>
    <Variable name="config.post.showShare" description="Show Share Buttons" type="string" default="true" value="true"/>
 
    <!-- Image Ratio -->
    <Variable name="config.post.ratio" description="Aspect ratio" type="string" default="true" value="true"/>
-   <Variable name="config.slider.ratio" description="Aspect ratio (Slider)" type="string" default="true" value="true"/>
-   <Variable name="config.card.ratio" description="Aspect ratio (Featured Post)" type="string" default="true" value="true"/>
+   <Variable name="config.slider.ratio" description="Aspect ratio (Slider)" type="string" default="flase" value="false"/>
+   <Variable name="config.card.ratio" description="Aspect ratio (Featured Post)" type="string" default="false" value="false"/>
 
    <!-- Show -->
    <Variable name="config.show.header" description="Show header" type="string" default="true" value="true"/>
-   <Variable name="config.show.topSearch" description="Show top search" type="string" default="false" value="false"/>
+   <Variable name="config.show.topSearch" description="Show top search" type="string" default="true" value="true"/>
    <Variable name="config.show.general" description="Show general section" type="string" default="true" value="true"/>
    <Variable name="config.show.sidebar" description="Show sidebar" type="string" default="true" value="true"/>
    <Variable name="config.show.stickySidebar" description="Sticky Sidebar" type="string" default="false" value="false"/>
@@ -1817,9 +1842,9 @@ img[data-original-width] {height: auto;}
    <Variable name="keycolor" description="Main Color" type="color" default="#2196f3" value="#2196f3"/>
    
    <Group description="Accents" selector="body">
-      <Variable name="main.bg" description="Main Background" type="color" default="#e0e0e0" value="#e0e0e0"/>
-      <Variable name="main.color" description="Color" type="color" default="#23a6b3" value="#23a6b3"/>
-      <Variable name="main.linkColor" description="Link color" type="color" default="#23a6b3" value="#23a6b3"/>
+      <Variable name="main.bg" description="Main Background" type="color" default="#e0e0e0" value="rgba(0, 0, 0, 0.50)"/>
+      <Variable name="main.color" description="Color" type="color" default="#23a6b3" value="#bb1919"/>
+      <Variable name="main.linkColor" description="Link color" type="color" default="#23a6b3" value="#bb1919"/>
    </Group>
    
    <Group description="Widths" selector=".container__main">
@@ -1835,64 +1860,64 @@ img[data-original-width] {height: auto;}
    </Group>
    
    <Group description="Content color" selector=".container__main">
-      <Variable name="body.bg" description="Page Background Color" type="color" default="#ffffff" value="#ffffff"/>
+      <Variable name="body.bg" description="Page Background Color" type="color" default="#ffffff" value="rgba(0, 0, 0, 0.50)"/>
       <Variable name="body.colorTitle" description="Title Color" type="color" default="#262626" value="#262626"/>
       <Variable name="body.colorText" description="Text Color" type="color" default="#757575" value="#757575"/>
    </Group>
 
    <Group description="Header" selector=".header__wrapper">
-      <Variable name="header.bg" description="Header Background" type="color" default="#f2f2f2" value="#f2f2f2"/>
-      <Variable name="header.colorLogo" description="Blog Title Color" type="color" default="#3c3c3c" value="#3c3c3c"/>
-      <Variable name="header.colorDesc" description="Blog Description Color" type="color" default="#797979" value="#797979"/>
-      <Variable name="header.margin" description="Content margin" type="length" min="0" max="200px" default="28px" value="28px"/>
+      <Variable name="header.bg" description="Header Background" type="color" default="#f2f2f2" value="rgba(0, 0, 0, 0.50)"/>
+      <Variable name="header.colorLogo" description="Blog Title Color" type="color" default="#3c3c3c" value="#bb1919"/>
+      <Variable name="header.colorDesc" description="Blog Description Color" type="color" default="#797979" value="#adadad"/>
+      <Variable name="header.margin" description="Content margin" type="length" min="0" max="200px" default="28px" value="20px"/>
    </Group>
    
    <Group description="Header Bar" selector=".header__nav">
-      <Variable name="menu.bg" description="Background Color" type="color" default="#232323" value="#232323"/>
+      <Variable name="menu.bg" description="Background Color" type="color" default="#232323" value="#131313"/>
       <Variable name="menu.color" description="Color" type="color" default="#ffffff" value="#ffffff"/>
       <Variable name="menu.icon" description="Icon color" type="color" default="#ffffff" value="#ffffff"/>
    </Group>
    
    <Group description="Gadgets" selector=".main .widget">
-      <Variable name="gadget.bg" description="Gadget Background" type="color" default="transparent" value="transparent"/>
-      <Variable name="gadget.title" description="Background Color" type="color" default="#f2f2f2" value="#f2f2f2"/>
+      <Variable name="gadget.bg" description="Gadget Background" type="color" default="transparent" value="rgba(0, 0, 0, 0)"/>
+      <Variable name="gadget.title" description="Background Color" type="color" default="#f2f2f2" value="rgba(0, 0, 0, 0.50)"/>
       <Variable name="gadget.color" description="Gadget Title Color" type="color" default="#ffffff" value="#ffffff"/>
-      <Variable name="gadget.icon" description="Icon color" type="color" default="rgba(0,0,0,0.5)" value="rgba(0,0,0,0.5)"/>
-      <Variable name="gadget.margin" description="Content margin" type="length" min="0" max="50px" default="0" value="0"/>
+      <Variable name="gadget.icon" description="Icon color" type="color" default="rgba(0,0,0,0.5)" value="#ffffff"/>
+      <Variable name="gadget.margin" description="Content margin" type="length" min="0" max="50px" default="0" value="0px"/>
    </Group>
    
    <Group description="Posts" selector=".card__content">
-      <Variable name="post.bg" description="Post background color" type="color" default="#f2f2f2" value="#f2f2f2"/>
-      <Variable name="post.margin" description="Content margin" type="length" min="0" max="50px" default="28px" value="28px"/>
-      <Variable name="post.titleColor" description="Post Title Color" type="color" default="#262626" value="#262626"/>
-      <Variable name="post.snippetColor" description="Post text color" type="color" default="#757575" value="#757575"/>
-      <Variable name="post.footerColor" description="Post Footer Color" type="color" default="#757575" value="#757575"/>
-      <Variable name="post.shareColor" description="Sharing icons color" type="color" default="#757575" value="#757575"/>
-      <Variable name="post.borderColor" description="Border Color" type="color" default="rgba(0,0,0,0.1)" value="rgba(0,0,0,0.1)"/>
+      <Variable name="post.bg" description="Post background color" type="color" default="#f2f2f2" value="#131313"/>
+      <Variable name="post.margin" description="Content margin" type="length" min="0" max="50px" default="28px" value="20px"/>
+      <Variable name="post.titleColor" description="Post Title Color" type="color" default="#262626" value="#ffffff"/>
+      <Variable name="post.snippetColor" description="Post text color" type="color" default="#757575" value="#bb1919"/>
+      <Variable name="post.footerColor" description="Post Footer Color" type="color" default="#757575" value="#adadad"/>
+      <Variable name="post.shareColor" description="Sharing icons color" type="color" default="#757575" value="#bb1919"/>
+      <Variable name="post.borderColor" description="Border Color" type="color" default="rgba(0,0,0,0.1)" value="#bb1919"/>
       <Variable name="post.imgHeight" description="Image height (classic)" type="length" min="50px" max="500px" default="360px" value="360px"/>
    </Group>
    
    <Group description="Sharing" selector=".footer__primary">
-      <Variable name="footer.primaryBg" description="Background Color" type="color" default="#f2f2f2" value="#f2f2f2"/>
+      <Variable name="footer.primaryBg" description="Background Color" type="color" default="#f2f2f2" value="rgba(0, 0, 0, 0.50)"/>
       <Variable name="footer.shareColor" description="Sharing icons color" type="color" default="#adadad" value="#adadad"/>
-      <Variable name="footer.copyColor" description="Text Color" type="color" default="#adadad" value="#adadad"/>
-      <Variable name="footer.linkColor" description="Link Color" type="color" default="#757575" value="#757575"/>
+      <Variable name="footer.copyColor" description="Text Color" type="color" default="#adadad" value="#ffffff"/>
+      <Variable name="footer.linkColor" description="Link Color" type="color" default="#757575" value="#adadad"/>
    </Group>
    
    <Group description="Footer" selector=".footer__widgets .widget">
-      <Variable name="footer.bg" description="Footer Background" type="color" default="#060606" value="#060606"/>
-      <Variable name="footer.gadgetBg" description="Gadget Background" type="color" default="transparent" value="transparent"/>
-      <Variable name="footer.gadgetTitle" description="Background Color" type="color" default="rgba(255,255,255,0.05)" value="rgba(255,255,255,0.05)"/>
-      <Variable name="footer.gadgetMargin" description="Content margin" type="length" min="0" max="50px" default="0" value="0"/>
+      <Variable name="footer.bg" description="Footer Background" type="color" default="#060606" value="rgba(0, 0, 0, 0)"/>
+      <Variable name="footer.gadgetBg" description="Gadget Background" type="color" default="transparent" value="rgba(0, 0, 0, 0)"/>
+      <Variable name="footer.gadgetTitle" description="Background Color" type="color" default="rgba(255,255,255,0.05)" value="rgba(0, 0, 0, 0)"/>
+      <Variable name="footer.gadgetMargin" description="Content margin" type="length" min="0" max="50px" default="0" value="0px"/>
    </Group>
    
    <Group description="Footer Links" selector=".footer__links">
-      <Variable name="footer.linksBg" description="Footer Background" type="color" default="#131313" value="#131313"/>
-      <Variable name="footer.IconColor" description="Icon color" type="color" default="#414141" value="#414141"/>
-      <Variable name="footer.links" description="Link Color" type="color" default="#ffffff" value="#ffffff"/>
+      <Variable name="footer.linksBg" description="Footer Background" type="color" default="#131313" value="rgba(0, 0, 0, 0)"/>
+      <Variable name="footer.IconColor" description="Icon color" type="color" default="#414141" value="rgba(0, 0, 0, 0)"/>
+      <Variable name="footer.links" description="Link Color" type="color" default="#ffffff" value="rgba(0, 0, 0, 0)"/>
    </Group>
 
-   <Variable name="body.background" description="Main Background" type="background" color="$(main.bg)" default="$(color) none repeat scroll top center" value="$(color) none repeat scroll top center"/>
+   <Variable name="body.background" description="Main Background" type="background" color="$(main.bg)" default="$(color) none repeat scroll top center" value="$(color) url(https://i.ibb.co/hCKm7wf/bgb.jpg) repeat fixed top left"/>
 
 */
 body {
@@ -1987,7 +2012,7 @@ h1, h2, h3, h4, h5, h6,
         margin-bottom: $(padding.margin);
     }
     .bottom-space {
-        padding-bottom: $(padding.margin);
+        padding-bottom: 7px;
     }
     .header__logo {
         padding-left: $(padding.margin);
@@ -1998,7 +2023,7 @@ h1, h2, h3, h4, h5, h6,
 -----------------------------------*/
 /*background*/
 .header__wrapper {
-    background-color: $(header.bg);
+    background: url(https://i.ibb.co/Q6TL2fZ/fondo-jntaixyz.png);
 }
 .logo__title .logo__link {
     color: $(header.colorLogo);
@@ -2156,10 +2181,320 @@ h1, h2, h3, h4, h5, h6,
     max-height: $(post.imgHeight);
 }
 .card__share .btn-border {
-    border: 2px solid $(post.borderColor);
-    color: $(post.shareColor);
+    border: 2px solid #bb1919;
+    color: #bb1919;
 }
-]]></b:skin>
+.titulodelpost {
+	width: 100%;
+	padding: 1rem;
+	text-transform: uppercase;
+	color: #fff;
+	background-color: #bb1919;
+    display: inline-block;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+	letter-spacing: 1px;
+    font-weight: 500;
+}
+.titulodelpost--pagina {
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+/*if => post__title is dark*/
+.is-dark .post__title--page {
+    border-color: rgba(0, 0, 0, 0.5);
+}  
+
+/*Estado del Hentai*/
+    .hentai-emision {
+	width: 100%;
+	text-align: center;
+    padding: 0.8rem .9rem;
+	margin: 1rem 0 0 0;
+    display: inline-block;
+    color: #fff;
+    background: #2dbb19;
+    border-radius: 10px;
+}
+
+    .hentai-finalizado {
+	width: 100%;
+	text-align: center;
+    padding: 0.8rem .9rem;
+	margin: 1rem 0 0 0;
+    display: inline-block;
+    color: #fff;
+    background: #bb1919;
+    border-radius: 10px;
+}
+    .hentai-proximamente {
+	width: 100%;
+	text-align: center;
+    padding: 0.8rem .9rem;
+	margin: 1rem 0 0 0;
+    display: inline-block;
+    color: #fff;
+    background: #2e2e2e;
+    border-radius: 10px;
+}
+
+/* Tabs */
+.wjs-item {
+	border-radius: 5px 5px 0px 0px;
+    display: inline-block;
+    padding: 1rem;
+    white-space: nowrap;
+    font-weight: 500;
+    transition-duration: 0s;
+}
+.wjs-item.is-active {
+    color:#fff;
+}
+.wjs-panel {
+    padding: 1rem .5rem;
+}
+.caja-normal {
+	width: 100%;
+	display: grid;
+	padding: 1rem;
+	margin-bottom: 1em;
+    background: #f2f2f2;
+	border-radius: 5px;
+}
+
+.caja-portada {
+	width: 30%;
+	display: inline-block;
+    float: left;
+	margin-right: 1em;
+	margin-bottom: 1em;
+}
+
+.caja-detalles {
+	width: 67.9%;
+	height: 403px;
+	display: inline-block;
+    float: left;
+	margin-bottom: 1em;
+	padding: 1rem;
+    background: #f2f2f2;
+	border-radius: 5px;
+}
+
+.caja-servidores {
+	width: 100%;
+	height: 300px;
+	display: inline-block;
+    float: left;
+	margin-bottom: 1em;
+	padding: 1rem;
+    background: #f2f2f2;
+	border-radius: 5px;
+}
+
+@media screen and (max-width:850px){
+	.caja-portada {
+	width: 100%;
+	}
+
+	.caja-detalles {
+	width: 100%;
+	}
+}
+
+.wjs-panel strong {
+	width: 23%;
+	float: left;
+	text-align: center;
+    padding: .5rem .5rem;
+    display: inline-block;
+    margin: 0 1rem 0 0;
+    background: #bb1919;
+    border-radius: 20px;
+    color: #fff;
+}
+
+.info-anime {
+	width: 70%;
+	float: left;
+	text-align: justify;
+    padding: .5rem .5rem;
+    display: inline-block;
+    margin: 0 1rem .5rem 0;
+    border-radius: 20px;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+
+
+@media screen and (max-width:850px){
+	.wjs-panel strong {
+	width: 100%;
+	}
+
+	.info-anime {
+	width: 100%;
+	}
+}
+
+/* if => is vertical */
+.tab-vertical .wjs-item {
+    display: inline-block;
+}
+.tab-vertical {
+    display: -ms-flexbox;
+    display: flex;
+}
+/*if => tab is dark*/
+.is-dark .wjs-tab .wjs-item,
+.is-dark .wjs-tab .wjs-item:hover {
+    color: #fff;
+}
+/* Spoiler */
+.wjs-spoiler,
+.accordion-item {
+    margin-bottom: 7px;
+}
+.wjs-button,
+.accordion-title {
+    padding: .8rem 1rem;
+    cursor: pointer;
+    display: block;
+    font-weight: 500;
+    color: #262626;
+    background: #e6e6e6;
+    border-radius: 2px;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+.wjs-button:hover,
+.accordion-title:hover {
+	background-color: rgba(164, 207, 244);
+}
+.wjs-container,
+.accordion-content {
+    height: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow: hidden;
+    -webkit-transform: translateY(-1rem);
+            transform: translateY(-1rem);
+}
+.wjs-container.is-active,
+.accordion-item.is-active .accordion-content {
+    height: auto;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+    transition: -webkit-transform .3s;
+    transition: transform .3s;
+    transition: transform .3s, -webkit-transform .3s;
+}
+
+.cover-report {
+    position: absolute;
+    left: -1rem;
+}
+.cover-report i {
+    font-size: 1.5rem;
+    color: rgba(0, 0, 0, 0.7);
+    display: block;
+    background: #bb1919;
+    padding: 1rem;
+    border-radius: 6px 6px 20px 6px;
+}
+.cover-report i:hover {
+    color: #fff;
+    transition: color .3s;
+}
+
+/*!
+=> Plugin: scrollToTop
+=> by zkreations.com | Daniel Abel 
+*/.scrollToTop {outline: none;border: none;font-size: 14px;cursor: pointer;}.scrollToTop svg {display: block;}.scrollToTop {position: fixed;z-index: 9999;opacity: 0;visibility: hidden;-webkit-transition: visibility .3s, opacity .3s, background .3s, -webkit-transform .3s;transition: visibility .3s, opacity .3s, background .3s, -webkit-transform .3s;transition: transform .3s, visibility .3s, opacity .3s, background .3s;transition: transform .3s, visibility .3s, opacity .3s, background .3s, -webkit-transform .3s;-webkit-transform: translateY(-2em);transform: translateY(-2em);}.scrollToTop.visible {visibility: visible;opacity: 1;-webkit-transform: translateY(0);transform: translateY(0);}  
+/*
+=> Personalizar
+*/
+/* Icono
+--------------------------------------------*/
+.scrollToTop svg {
+   fill: #FFFFFF; /* color */
+}
+/* Boton
+--------------------------------------------*/
+.scrollToTop {
+   background-color: #bb1919; /* color de fondo */
+   box-shadow: 0 1px 2px rgba(0,0,0,0.5), 0 1px 7px rgba(0,0,0,0.25); /* sombra */
+   bottom: 4em; /* Separación inferior */
+   right: 1em; /* Separación derecha */
+   padding: .5em; /* relleno */
+   border-radius: 4px; /* borde redondeado */
+}
+.scrollToTop:hover {
+   background-color: rgba(0, 0, 0, 0.95); /* color de fondo (hover) */
+}@keyframes love {
+    to {
+        transform: scale(1)
+    }
+    from {
+        transform: scale(1.5)
+    }
+}
+.love {
+    display: inline-block;
+    animation: love 01s infinite
+}
+/*!
+* Random background
+* by zkreations
+*/
+.headCover__random {
+    background-size: cover;
+    background: rgba(0,0,0,.5); /*color del fondo*/
+    background-position: center top; /*posicion del fondo*/
+}
+.headCover__random,
+.headCover__random--img {
+    width: 100%;
+}
+/*!
+* Custom name: firstag v2.0.2
+* by zkreations
+*/
+.firstag{position:relative;font-size:14px}.firstag__content{position:absolute;top:.5em;right:.5em;z-index:20;display:inline-block}.firstag__name{text-transform:capitalize;float:left;text-decoration:none;cursor:pointer;-webkit-transition:background .3s;transition:background .3s}
+/*
+=> Personalizacion
+*/
+.firstag__name {
+    padding: 4px 8px;
+    background-color: #fff;
+    color: #fff;
+    border-radius: 2px;
+    margin: 2px;
+    font-size: 1rem;
+}
+.firstag__name:hover {
+    color: #bb1919;
+    background-color: #fff;
+}
+/*
+=> Colores propios
+*/
+.firstag__name--Emision {
+   background-color: #2dbb19;
+}
+.firstag__name--Finalizado {
+   background-color: #bb1919;
+}
+.firstag__name--Proximamente {
+   background-color: #2e2e2e;
+}
+.a4m {
+    background: #bb1919;
+}]]></b:skin>
 
 <b:if cond='data:view.isLayoutMode'>
 <b:template-skin><![CDATA[
@@ -2297,6 +2632,12 @@ body#layout #isDark .dropregion.dr_active {
 }
 ]]></b:template-skin>
 </b:if>
+<script id='chatBroEmbedCode'>
+/* Chatbro Widget Embed Code Start */
+function ChatbroLoader(chats,async){async=!1!==async;var params={embedChatsParameters:chats instanceof Array?chats:[chats],lang:navigator.language||navigator.userLanguage,needLoadCode:&#39;undefined&#39;==typeof Chatbro,embedParamsVersion:localStorage.embedParamsVersion,chatbroScriptVersion:localStorage.chatbroScriptVersion},xhr=new XMLHttpRequest;xhr.withCredentials=!0,xhr.onload=function(){eval(xhr.responseText)},xhr.onerror=function(){console.error(&#39;Chatbro loading error&#39;)},xhr.open(&#39;GET&#39;,&#39;//www.chatbro.com/embed.js?&#39;+btoa(unescape(encodeURIComponent(JSON.stringify(params)))),async),xhr.send()}
+/* Chatbro Widget Embed Code End */
+ChatbroLoader({encodedChatId: &#39;736Pp&#39;});
+</script>
 &lt;!--</head>--&gt;&lt;/head&gt;
 
 <body>
@@ -2306,8 +2647,8 @@ body#layout #isDark .dropregion.dr_active {
 <b:with value='{mode: data:view.isLayoutMode, sidebar: data:skin.vars.config_show_sidebar, stickySidebar: data:skin.vars.config_show_stickySidebar, general: data:skin.vars.config_show_general, oppositeBlog: data:skin.vars.config_show_oppositeBlog, wide: data:skin.vars.config_show_wide, showMeta: data:skin.vars.config_post_showMeta, showSnippet: data:skin.vars.config_post_showSnippet, showShare: data:skin.vars.config_post_showShare, showHeader: data:skin.vars.config_show_header}' var='layout'>
 
 
-<b:tag id='isDark' cond='data:layout.mode and data:skin.vars.config_admin_dark' name='div'>
-<b:tag id='showInfo' cond='data:layout.mode and data:skin.vars.config_admin_showInfo' name='div'>
+<b:tag cond='data:layout.mode and data:skin.vars.config_admin_dark' id='isDark' name='div'>
+<b:tag cond='data:layout.mode and data:skin.vars.config_admin_showInfo' id='showInfo' name='div'>
 
 <b:tag class='container' cond='!data:layout.wide' name='div'>
 
@@ -2315,48 +2656,59 @@ body#layout #isDark .dropregion.dr_active {
 
 <header class='header'>
 <b:section id='Header' maxwidgets='4'>
-  <b:widget cond='data:layout.showHeader' id='Header1' locked='false' title='Anime (Cabecera)' type='Header' version='1'>
-    <b:includable id='main'>
-      <div class='header__wrapper'>
-      <b:tag class='container' cond='data:layout.wide' name='div'>
-        <div class='header__logo'>
-          <b:include expr:name='data:useImage ? "logo" : "title"'/>
-          <b:include cond='data:useImage ? (data:imagePlacement == "BEFORE_DESCRIPTION") : data:description' name='description'/>
-        </div>
-      </b:tag>
-      </div>
-    </b:includable>
-    <b:includable id='description'>
-      <span class='logo__descripcion'><data:description/></span>
-    </b:includable>
-    <b:includable id='logo'>
-      <a class='logo__image' expr:href='data:blog.homepageUrl'>
-        <img expr:alt='data:title' expr:src='data:sourceUrl'/>
-      </a>
-    </b:includable>
-    <b:includable id='title'>
-      <b:tag class='logo__title' expr:name='data:view.isHomepage ? "h1" : "div"'>
-        <a expr:href='data:blog.homepageUrl' class='logo__link'><data:title/></a>
-      </b:tag>
-    </b:includable>
-  </b:widget>
-  <b:widget id='HTML100' locked='false' title='Main menu' type='HTML' version='1'>
+  <b:widget id='Image1' locked='false' title='' type='Image'>
     <b:widget-settings>
-      <b:widget-setting name='content'><![CDATA[<ul class="dropdown-menu nav__menu">
-   <li><a href="/">Home</a></li>
-   <li><a href="#">Buy theme</a>
-      <ul>
-         <li><a href="#">Store</a>
-            <ul>
-               <li><a href="#">Gumroad</a></li>
-               <li><a href="#">Official site</a></li>
-            </ul>
-         </li>
-      </ul>
-   </li>
-   <li><a href="/404">Error 404</a></li>
-   <li><a href="/p/shortcodes.html">Shortcodes</a></li>
-</ul>]]></b:widget-setting>
+      <b:widget-setting name='displayUrl'>https://i.ibb.co/1qJdVP7/Sin-t-tulo-1-min.png</b:widget-setting>
+      <b:widget-setting name='displayHeight'>300</b:widget-setting>
+      <b:widget-setting name='sectionWidth'>150</b:widget-setting>
+      <b:widget-setting name='shrinkToFit'>false</b:widget-setting>
+      <b:widget-setting name='displayWidth'>1350</b:widget-setting>
+      <b:widget-setting name='link'>https://jntaixyz.blogspot.com/</b:widget-setting>
+      <b:widget-setting name='caption'/>
+    </b:widget-settings>
+    <b:includable id='main'>
+    <b:if cond='data:title != &quot;&quot;'>
+      <h2><data:title/></h2>
+    </b:if>
+    <div class='widget-content'>
+      <b:tag cond='data:link' expr:href='data:link' name='a'>
+        <img expr:alt='data:title' expr:height='data:height' expr:id='data:widget.instanceId + &quot;_img&quot;' expr:src='data:sourceUrl' expr:width='data:width'/>
+      </b:tag>
+      <br/>
+      <b:if cond='data:caption'>
+        <span class='caption'><data:caption/></span>
+      </b:if>
+    </div>
+    <b:include name='quickedit'/>
+  </b:includable>
+  </b:widget>
+  <b:widget id='HTML100' locked='false' title='Menú' type='HTML' version='1'>
+    <b:widget-settings>
+      <b:widget-setting name='content'>&lt;ul class=&quot;dropdown-menu nav__menu&quot;&gt;
+   &lt;li&gt;&lt;a href=&quot;/&quot;&gt;&lt;i class=&quot;fas fa-home&quot;&gt;&lt;/i&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;/p/listado.html&quot;&gt;&lt;i class=&quot;fas fa-list-ul&quot;&gt;&lt;/i&gt;Listado&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;/p/pedidos.html&quot;&gt;&lt;i class=&quot;fas fa-clipboard-list&quot;&gt;&lt;/i&gt;Haz tu pedido&lt;/a&gt;&lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fas fa-user-secret&quot;&gt;&lt;/i&gt;Amigos&lt;/a&gt;
+      &lt;ul&gt;
+         &lt;li&gt;&lt;a href=&quot;/p/en-desarrollo.html&quot;&gt;&lt;i class=&quot;fas fa-heart&quot;&gt;&lt;/i&gt;Afiliados&lt;/a&gt;
+         &lt;li&gt;&lt;a href=&quot;/p/en-desarrollo.html&quot;&gt;&lt;i class=&quot;fas fa-handshake&quot;&gt;&lt;/i&gt;Afiliate&lt;/a&gt;&lt;/li&gt;
+      &lt;/li&gt;&lt;/ul&gt;
+   &lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fas fa-users&quot;&gt;&lt;/i&gt;Staff&lt;/a&gt;
+      &lt;ul&gt;
+         &lt;li&gt;&lt;a href=&quot;/p/en-desarrollo.html&quot;&gt;&lt;i class=&quot;fas fa-user-tie&quot;&gt;&lt;/i&gt;Perfiles&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;/p/en-desarrollo.html&quot;&gt;&lt;i class=&quot;fas fa-user-plus&quot;&gt;&lt;/i&gt;Unirse al staff&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+   &lt;/li&gt;
+   &lt;li&gt;&lt;a href=&quot;#&quot;&gt;&lt;i class=&quot;fas fa-plus&quot;&gt;&lt;/i&gt;Más&lt;/a&gt;
+      &lt;ul&gt;
+         &lt;li&gt;&lt;a href=&quot;/p/terminos-y-condiciones.html&quot;&gt;&lt;i class=&quot;fas fa-user-shield&quot;&gt;&lt;/i&gt;Terminos&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;/p/reportar-error.html&quot;&gt;&lt;i class=&quot;fas fa-exclamation-triangle&quot;&gt;&lt;/i&gt;Reportar&lt;/a&gt;&lt;/li&gt;
+         &lt;li&gt;&lt;a href=&quot;/p/acerca-de.html&quot;&gt;&lt;i class=&quot;fas fa-shield-alt&quot;&gt;&lt;/i&gt;Acerca de&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+   &lt;/li&gt;
+   &lt;div class=&#39;a4m&#39;&gt;&lt;li&gt;&lt;a href=&quot;https://anime4mega.net&quot;&gt;&lt;i class=&quot;fas fa-cloud-download-alt&quot;&gt;&lt;/i&gt;Anime4Mega&lt;/a&gt;&lt;/li&gt;&lt;/div&gt;
+&lt;/ul&gt;</b:widget-setting>
     </b:widget-settings>
     <b:includable id='main'>
       <b:tag class='container' cond='data:layout.wide' name='div'>
@@ -2364,7 +2716,7 @@ body#layout #isDark .dropregion.dr_active {
       <b:class cond='data:skin.vars.config_show_topSearch' name='display-flex justify-content-between'/> 
       <b:class expr:name='data:skin.vars.config_ta_menu'/>
         <button class='nav__toggle skin-box toggleClass reset' data-target='nav__menu'>
-          <span class='nav__toggle--icon'><span></span></span>
+          <span class='nav__toggle--icon'><span/></span>
         </button>
         <data:content/>
         <b:include cond='data:skin.vars.config_show_topSearch' name='search'/>
@@ -2373,12 +2725,12 @@ body#layout #isDark .dropregion.dr_active {
     </b:includable>
     <b:includable id='search'>
       <div class='top-search'>
-        <button class="search__toggle skin-bg-hover display-flex align-items-center wjs-outsite" data-target="top-search">
-          <i class="fas fa-search fa-fw fa-mn"/>
-          <i class="fas fa-times fa-fw fa-mn"/>
+        <button class='search__toggle skin-bg-hover display-flex align-items-center wjs-outsite' data-target='top-search'>
+          <i class='fas fa-search fa-fw fa-mn'/>
+          <i class='fas fa-times fa-fw fa-mn'/>
         </button>
-        <form action="/search" class="search__form display-flex align-items-center" id="top-search" method="get">
-          <input autocomplete='off' class='skin-body-font search__input flex-fill form-input' name='q' expr:placeholder='data:messages.searchBlog' spellcheck='false' type='text' expr:value='data:view.isSearch ? data:view.search.query.escaped : ""' required='required'/>
+        <form action='/search' class='search__form display-flex align-items-center' id='top-search' method='get'>
+          <input autocomplete='off' class='skin-body-font search__input flex-fill form-input' expr:placeholder='data:messages.search' expr:value='data:view.isSearch ? data:view.search.query.escaped : &quot;&quot;' name='q' required='required' spellcheck='false' type='text'/>
         </form>
       </div>
     </b:includable>
@@ -2390,8 +2742,8 @@ body#layout #isDark .dropregion.dr_active {
 <div class='main skin-box'>
 
 <b:if cond='data:layout.general'>
-<b:section cond='data:view.isHomepage' id='general' class='main__general'>
-  <b:widget id='PopularPosts100' locked='true' title='Popular Posts' type='PopularPosts'>
+<b:section class='main__general' cond='data:view.isHomepage' id='general'>
+  <b:widget id='PopularPosts100' locked='true' title='Popular Posts' type='PopularPosts' version='1'>
     <b:widget-settings>
       <b:widget-setting name='numItemsToShow'>10</b:widget-setting>
       <b:widget-setting name='showThumbnails'>true</b:widget-setting>
@@ -2406,11 +2758,11 @@ body#layout #isDark .dropregion.dr_active {
       <b:else/>
         <div class='slider'>
           <b:include name='slider-controls'/>
-          <div class="slider__container">
+          <div class='slider__container'>
           <b:class expr:name='data:skin.vars.config_ta_slider'/>
             <b:loop values='data:posts' var='i'>
-              <div class="slider__item">
-                <a expr:href='data:i.href' class="gallery__href">
+              <div class='slider__item'>
+                <a class='gallery__href' expr:href='data:i.href'>
                   <b:include name='slider-image'/>
                   <b:include name='slider-title'/>
                 </a>
@@ -2420,17 +2772,17 @@ body#layout #isDark .dropregion.dr_active {
         </div>
       </b:if>
     </b:includable>
-    <b:includable id='slider-title'>
-      <span class='gallery__title'><data:i.title/></span>
-    </b:includable>
-    <b:includable id='slider-image'>
-      <b:with value='data:i.featuredImage ? data:i.featuredImage : data:imgDefault' var='img'>
-        <img class='gallery__image' expr:alt='data:i.title' expr:src='data:skin.vars.config_slider_ratio ? resizeImage(data:img,300,"6:5") : resizeImage(data:img,300)'/>
-      </b:with>        
-    </b:includable>
     <b:includable id='slider-controls'>
       <button class='controls__prev'><i class='fas fa-chevron-left'/></button>
       <button class='controls__next'><i class='fas fa-chevron-right'/></button>
+    </b:includable>
+    <b:includable id='slider-image'>
+      <b:with value='data:i.featuredImage ? data:i.featuredImage : data:imgDefault' var='img'>
+        <img class='gallery__image' expr:alt='data:i.title' expr:src='data:skin.vars.config_slider_ratio ? resizeImage(data:img,300,&quot;6:5&quot;) : resizeImage(data:img,300)'/>
+      </b:with>        
+    </b:includable>
+    <b:includable id='slider-title'>
+      <span class='gallery__title'><data:i.title/></span>
     </b:includable>
   </b:widget>
 </b:section>
@@ -2439,16 +2791,36 @@ body#layout #isDark .dropregion.dr_active {
 <div class='main__blog clearfix'>
 
 <!-- Posts -->
-<div expr:class='"blog " + (data:layout.oppositeBlog ? "skin-right" : "skin-left") + (!data:layout.sidebar ? " noSidebar" : "")'>
+<div expr:class='&quot;blog &quot; + (data:layout.oppositeBlog ? &quot;skin-right&quot; : &quot;skin-left&quot;) + (!data:layout.sidebar ? &quot; noSidebar&quot; : &quot;&quot;)'>
 <b:section id='Blog'>
-  <b:widget id='Blog1' locked='true' title='Blog Posts' type='Blog'>
+  <b:widget id='Blog1' locked='true' title='Entradas del blog' type='Blog' version='1'>
     <b:widget-settings>
+      <b:widget-setting name='showDateHeader'>true</b:widget-setting>
+      <b:widget-setting name='style.textcolor'>#757575</b:widget-setting>
+      <b:widget-setting name='showShareButtons'>true</b:widget-setting>
+      <b:widget-setting name='authorLabel'>By</b:widget-setting>
+      <b:widget-setting name='showCommentLink'>true</b:widget-setting>
+      <b:widget-setting name='style.urlcolor'>#757575</b:widget-setting>
+      <b:widget-setting name='showAuthor'>false</b:widget-setting>
+      <b:widget-setting name='disableGooglePlusShare'>true</b:widget-setting>
+      <b:widget-setting name='style.linkcolor'>#ffffff</b:widget-setting>
+      <b:widget-setting name='style.unittype'>TextAndImage</b:widget-setting>
+      <b:widget-setting name='style.bgcolor'>#000000</b:widget-setting>
+      <b:widget-setting name='showAuthorProfile'>false</b:widget-setting>
+      <b:widget-setting name='style.layout'>1x1</b:widget-setting>
+      <b:widget-setting name='showLabels'>true</b:widget-setting>
+      <b:widget-setting name='showLocation'>true</b:widget-setting>
+      <b:widget-setting name='showTimestamp'>true</b:widget-setting>
+      <b:widget-setting name='postsPerAd'>1</b:widget-setting>
+      <b:widget-setting name='showBacklinks'>false</b:widget-setting>
+      <b:widget-setting name='style.bordercolor'>#000000</b:widget-setting>
       <b:widget-setting name='showInlineAds'>false</b:widget-setting>
+      <b:widget-setting name='showReactions'>false</b:widget-setting>
     </b:widget-settings>
     <b:includable id='main' var='top'>
       <b:if cond='data:view.isError'>
-        <div class="error-page skin-color-text">
-          <h1 class="error-page__title skin-color-title"><i class="far fa-meh"></i> 404</h1>
+        <div class='error-page skin-color-text'>
+          <h1 class='error-page__title skin-color-title'><i class='far fa-meh'/> 404</h1>
           <div class='error-page__text'><data:navMessage/></div>
         </div>
       <b:elseif cond='data:view.isMultipleItems'/>
@@ -2467,8 +2839,8 @@ body#layout #isDark .dropregion.dr_active {
           </b:if>
           <b:with value='data:skin.vars.config_post_style' var='isStyle'>
             <b:with value='data:skin.vars.config_post_column' var='isColumn'>
-              <b:with value='{isSearch: data:view.search.query, isGrid: (data:isStyle == "grid"), isClassic: (data:isStyle == "classic"), isList: (data:isStyle == "list"), isPortfolio: (data:isStyle == "portfolio")}' var='this'>
-                <div class="items row">
+              <b:with value='{isSearch: data:view.search.query, isGrid: (data:isStyle == &quot;grid&quot;), isClassic: (data:isStyle == &quot;classic&quot;), isList: (data:isStyle == &quot;list&quot;), isPortfolio: (data:isStyle == &quot;portfolio&quot;)}' var='this'>
+                <div class='items row'>
                   <b:class expr:name='data:skin.vars.config_ta_card'/>
                   <b:loop values='data:posts' var='post'>
                     <b:include data='post' name='post'/><!-- Include posts -->
@@ -2487,31 +2859,10 @@ body#layout #isDark .dropregion.dr_active {
           </article>
         </b:loop>
       </b:if>
-      <b:tag async='async' cond='data:skin.vars.config_comments == "disqus" and !data:view.isError' expr:src='+("//",data:skin.vars.config_shortname,".disqus.com/count.js")' id='dsq-count-scr' name='script'/>
+      <b:tag async='async' cond='data:skin.vars.config_comments == &quot;disqus&quot; and !data:view.isError' expr:src='+(&quot;//&quot;,data:skin.vars.config_shortname,&quot;.disqus.com/count.js&quot;)' id='dsq-count-scr' name='script'/>
     </b:includable>
     <b:includable id='backlinkDeleteIcon' var='backlink'><!--disabled--></b:includable>
     <b:includable id='backlinks' var='post'><!--disabled--></b:includable>
-    <b:includable id='comments-blogger' var='post'>
-      <b:include data='post' name='comment_picker'/>
-    </b:includable>
-    <b:includable id='comments-disqus' var='post'>
-      <div id='disqus_thread'/>
-      <script>
-      var disqus_shortname = "<data:skin.vars.config_shortname/>",
-          disqus_config = function(){
-             this.page.url = "<data:view.url.canonical/>";
-             this.page.title = "<data:view.title.escaped/>";
-          };//<![CDATA[
-       (function() {
-           var d = document, s = d.createElement('script');
-           s.async = true;s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-           s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s);
-       })();//]]>
-       </script>
-    </b:includable>
-    <b:includable id='comments-facebook' var='post'>
-      <div class='fb-comments' data-colorscheme='light' data-numposts='10' data-width='100%' expr:data-href='data:view.url.canonical'/>
-    </b:includable>
     <b:includable id='comment-form' var='post'><!--disabled--></b:includable>
     <b:includable id='commentDeleteIcon' var='comment'><!--disabled--></b:includable>
     <b:includable id='comment_count_picker' var='post'><!--disabled--></b:includable>
@@ -2521,24 +2872,39 @@ body#layout #isDark .dropregion.dr_active {
             <div id='comment-holder'><data:post.commentHtml/></div>
             <b:include data='post' name='threaded_comment_js'/>
          </div>
-         <b:include data='post' expr:name='data:post.allowNewComments ? "threaded-comment-form" : "status-message"'/>
+         <b:include data='post' expr:name='data:post.allowNewComments ? &quot;threaded-comment-form&quot; : &quot;status-message&quot;'/>
       </div>
     </b:includable>
     <b:includable id='comments' var='post'>
       <b:if cond='data:post.allowComments'>
-         <h3 class="post-heading">
+         <h3 class='post-heading'>
            <span class='skin-font skin-bg'>
-             <b:if cond='data:skin.vars.config_comments != "blogger"'>
+             <b:if cond='data:skin.vars.config_comments != &quot;blogger&quot;'>
                <data:skin.vars.config_comments/>
              <b:else/>
                <data:post.commentLabelFull/>
              </b:if>
            </span>
          </h3>
-         <div id='infoComments' class='post-comments'>
-            <b:include data='post' expr:name='data:view.isPreview ? "status-message" : "comments-" + data:skin.vars.config_comments'/>
+         <div class='post-comments' id='infoComments'>
+            <b:include data='post' expr:name='data:view.isPreview ? &quot;status-message&quot; : &quot;comments-&quot; + data:skin.vars.config_comments'/>
          </div>
       </b:if>
+    </b:includable>
+    <b:includable id='comments-disqus' var='post'>
+      <div id='disqus_thread'/>
+      <script>
+      var disqus_shortname = &quot;<data:skin.vars.config_shortname/>&quot;,
+          disqus_config = function(){
+             this.page.url = &quot;<data:view.url.canonical/>&quot;;
+             this.page.title = &quot;<data:view.title.escaped/>&quot;;
+          };//<![CDATA[
+       (function() {
+           var d = document, s = d.createElement('script');
+           s.async = true;s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+           s.setAttribute('data-timestamp', +new Date());(d.head || d.body).appendChild(s);
+       })();//]]>
+       </script>
     </b:includable>
     <b:includable id='feedLinks'><!--disabled--></b:includable>
     <b:includable id='feedLinksBody' var='links'><!--disabled--></b:includable>
@@ -2548,14 +2914,14 @@ body#layout #isDark .dropregion.dr_active {
     <b:includable id='mobile-nextprev'><!--disabled--></b:includable>
     <b:includable id='mobile-post' var='post'><!--disabled--></b:includable>
     <b:includable id='nextprev'>
-      <b:tag cond='data:newerPageUrl or data:olderPageUrl' class='blog-pager' id='blog-pager' name='div'>
+      <b:tag class='blog-pager' cond='data:newerPageUrl or data:olderPageUrl' id='blog-pager' name='div'>
         <b:if cond='data:newerPageUrl'>
-          <a expr:href='data:newerPageUrl' class='blog-pager__item btn-border' expr:title='data:newerPageTitle'>
+          <a class='blog-pager__item btn-border' expr:href='data:newerPageUrl' expr:title='data:newerPageTitle'>
             <i class='fas fa-ml fa-long-arrow-alt-left'/> <data:messages.newer/>
           </a>
         </b:if>
         <b:if cond='data:olderPageUrl'>
-          <a expr:href='data:olderPageUrl' class='blog-pager__item btn-border' expr:title='data:olderPageTitle'>
+          <a class='blog-pager__item btn-border' expr:href='data:olderPageUrl' expr:title='data:olderPageTitle'>
             <data:messages.older/> <i class='fas fa-ml fa-long-arrow-alt-right'/>
           </a>
         </b:if>
@@ -2571,11 +2937,6 @@ body#layout #isDark .dropregion.dr_active {
         <b:include name='post-ads'/>
       <b:elseif cond='data:view.isPost'/>
         <!--{{ Posts }}-->
-        <header class='post__header'>
-          <b:include name='post-tags'/>
-          <b:include name='post-title'/>
-          <b:include name='post-meta'/>
-        </header>
         <b:include name='post-adsIn'/>
         <b:include name='post-body'/>
         <b:include name='schema-jsonld'/>
@@ -2584,18 +2945,15 @@ body#layout #isDark .dropregion.dr_active {
         <b:include name='post-related'/>
       <b:elseif cond='data:view.isPage'/>
         <!--{{ Static page }}-->
-        <header class='page__header'>
-          <b:include name='post-title'/>
-        </header>
         <b:include name='post-body'/>
         <b:include name='schema-jsonld'/>
       </b:if>
     </b:includable>
     <b:includable id='post-ads'>
       <b:if cond='data:blog.adsenseHasAds and data:post.includeAd'>
-        <div expr:class='"card adsbygoogle card--" + data:isStyle'>
-          <b:class cond='data:isStyle in {"grid","portfolio"}' expr:name='data:isColumn == 2 ? "col-6-sm" : (data:isColumn == 3 ? "col-4-md col-6-sm" : (data:isColumn == 4 ? "col-3-lg col-4-md col-6-sm" : (data:isColumn == 5 ? "col-5ta-xl col-3-lg col-4-md col-6-sm" : (data:isColumn == 6 ? "col-2-xl col-3-lg col-4-md col-6-sm" : "col-12"))))'/>
-          <b:class cond='data:isStyle in {"list","classic"}' name='col-12'/>
+        <div expr:class='&quot;card adsbygoogle card--&quot; + data:isStyle'>
+          <b:class cond='data:isStyle in {&quot;grid&quot;,&quot;portfolio&quot;}' expr:name='data:isColumn == 2 ? &quot;col-6-sm&quot; : (data:isColumn == 3 ? &quot;col-4-md col-6-sm&quot; : (data:isColumn == 4 ? &quot;col-3-lg col-4-md col-6-sm&quot; : (data:isColumn == 5 ? &quot;col-5ta-xl col-3-lg col-4-md col-6-sm&quot; : (data:isColumn == 6 ? &quot;col-2-xl col-3-lg col-4-md col-6-sm&quot; : &quot;col-12&quot;))))'/>
+          <b:class cond='data:isStyle in {&quot;list&quot;,&quot;classic&quot;}' name='col-12'/>
           <div class='card__content'>
           <b:class cond='data:this.isList' name=' display-flex flex-row-md flex-column'/>
             <data:adCode/>
@@ -2611,9 +2969,9 @@ body#layout #isDark .dropregion.dr_active {
       </b:if>
     </b:includable>
     <b:includable id='post-author'>
-      <b:tag name='a' cond='!data:this.isPortfolio' class='meta__author' expr:href='data:post.authorProfileUrl' rel='author' target='_blank'>
+      <b:tag class='meta__author' cond='!data:this.isPortfolio' expr:href='data:post.authorProfileUrl' name='a' rel='author' target='_blank'>
         <b:class cond='!data:this.isPortfolio' name='skin-color-title meta__space g-profile'/>
-        <img class='author__avatar' expr:alt='data:post.author' expr:src='resizeImage(data:post.authorPhoto.thumbUrl,(!data:this.isPortfolio ? 30 : 50),"1:1")'/>
+        <img class='author__avatar' expr:alt='data:post.author' expr:src='resizeImage(data:post.authorPhoto.thumbUrl,(!data:this.isPortfolio ? 30 : 50),&quot;1:1&quot;)'/>
         <b:if cond='!data:this.isPortfolio'>
           <span class='author__name'><data:post.author/></span>
         </b:if>
@@ -2625,18 +2983,18 @@ body#layout #isDark .dropregion.dr_active {
       </div>
     </b:includable>
     <b:includable id='post-card'>
-      <div expr:class='"card card--" + data:isStyle'>
-        <b:class cond='data:isStyle in {"grid","portfolio"}' expr:name='data:isColumn == 2 ? "col-6-sm" : (data:isColumn == 3 ? "col-4-md col-6-sm" : (data:isColumn == 4 ? "col-3-lg col-4-md col-6-sm" : (data:isColumn == 5 ? "col-5ta-xl col-3-lg col-4-md col-6-sm" : (data:isColumn == 6 ? "col-2-xl col-3-lg col-4-md col-6-sm" : "col-12"))))'/>
-        <b:class cond='data:isStyle in {"list","classic"}' name='col-12'/>
-        <div class="card__content">
+      <div expr:class='&quot;card card--&quot; + data:isStyle'>
+        <b:class cond='data:isStyle in {&quot;grid&quot;,&quot;portfolio&quot;}' expr:name='data:isColumn == 2 ? &quot;col-6-sm&quot; : (data:isColumn == 3 ? &quot;col-4-md col-6-sm&quot; : (data:isColumn == 4 ? &quot;col-3-lg col-4-md col-6-sm&quot; : (data:isColumn == 5 ? &quot;col-5ta-xl col-3-lg col-4-md col-6-sm&quot; : (data:isColumn == 6 ? &quot;col-2-xl col-3-lg col-4-md col-6-sm&quot; : &quot;col-12&quot;))))'/>
+        <b:class cond='data:isStyle in {&quot;list&quot;,&quot;classic&quot;}' name='col-12'/>
+        <div class='card__content'>
           <b:class cond='data:this.isList' name=' display-flex flex-row-md flex-column'/>
           <b:include cond='!data:this.isPortfolio' name='post-card-cover'/>
-          <b:tag name='div' cond='!data:this.isPortfolio' class='card__data'>
+          <b:tag class='card__data' cond='!data:this.isPortfolio' name='div'>
             <b:class cond='data:this.isClassic' name='display-flex align-items-center flex-column'/>
-            <b:include expr:name='data:this.isPortfolio ? "post-card-cover" : "post-title"'/>
+            <b:include expr:name='data:this.isPortfolio ? &quot;post-card-cover&quot; : &quot;post-title&quot;'/>
             <b:include cond='data:this.isGrid and data:layout.showSnippet' name='post-snippet'/>
-            <b:include cond='data:this.isList and data:layout.showSnippet' name='post-snippet' data='{length: "md" }'/>
-            <b:include cond='data:this.isClassic and data:layout.showSnippet' name='post-snippet' data='{length: "lg" }'/>
+            <b:include cond='data:this.isList and data:layout.showSnippet' data='{length: &quot;md&quot; }' name='post-snippet'/>
+            <b:include cond='data:this.isClassic and data:layout.showSnippet' data='{length: &quot;lg&quot; }' name='post-snippet'/>
             <b:include cond='!data:this.isPortfolio and data:layout.showMeta' name='post-meta'/>
             <b:include cond='data:this.isClassic and data:layout.showShare' name='shareButtons'/>
           </b:tag>
@@ -2644,35 +3002,47 @@ body#layout #isDark .dropregion.dr_active {
       </div>
     </b:includable>
     <b:includable id='post-card-cover'>
+<b:with value='{&quot;Emision&quot;, &quot;Finalizado&quot;, &quot;Proximamente&quot;}' var='tags'>
+   <b:include cond='!data:this.isSearch' name='post-firstag'/>
+</b:with>
       <a expr:href='data:post.url'>
-        <b:class expr:name='data:this.isSearch ? "card-search__image flex-none" : "card__image flex-none"'/>
-        <b:tag name='i' cond='data:isStyle in {"grid","classic","list"}' class='card__more fas fa-search'/>
+        <b:class expr:name='data:this.isSearch ? &quot;card-search__image flex-none&quot; : &quot;card__image flex-none&quot;'/>
+        <b:tag class='card__more fas fa-user-secret' cond='data:isStyle in {&quot;grid&quot;,&quot;classic&quot;,&quot;list&quot;}' name='i'/>
         <b:include name='post-image'/>
         <b:include cond='data:this.isPortfolio' name='post-meta-portfolio'/>
       </a>
     </b:includable>
     <b:includable id='post-card-search'>
-      <div class="card-search col-12">
-        <div class="card__content card__data display-flex align-items-start">
+      <div class='card-search col-12'>
+        <div class='card__content card__data display-flex align-items-start'>
           <b:include name='post-card-cover'/>
-          <div class="card-search__data">
+          <div class='card-search__data'>
             <b:include name='post-title'/>
             <b:include name='post-snippet'/>
+			<b:include name='post-tags'/>
           </div>
         </div>
       </div>
     </b:includable>
+    <b:includable id='post-firstag'>
+   <b:class name='firstag'/>
+   <div class='firstag__content'>
+      <b:loop values='data:post.labels first (tag =&gt; tag.name in data:tags)' var='i'>
+         <a expr:class='&quot;firstag__name firstag__name--&quot; + data:i.name' expr:href='data:i.url'><data:i.name/></a>
+      </b:loop>
+   </div>
+</b:includable>
     <b:includable id='post-image'>
       <b:with value='data:post.firstImageUrl ? data:post.firstImageUrl : data:imgDefault' var='img'>
-        <img expr:alt='data:post.title' expr:src='data:this.isSearch ? resizeImage(data:img,60,"1:1") : data:this.isGrid ? (data:skin.vars.config_post_ratio ? resizeImage(data:img,300,"16:9") : resizeImage(data:img,300)) : (data:this.isClassic ? resizeImage(data:img,800,"16:9") : resizeImage(data:img,500,"1:1"))'/>
+        <img expr:alt='data:post.title' expr:src='data:this.isSearch ? resizeImage(data:img,60,&quot;1:1&quot;) : data:this.isGrid ? (data:skin.vars.config_post_ratio ? resizeImage(data:img,300,&quot;16:9&quot;) : resizeImage(data:img,300)) : (data:this.isClassic ? resizeImage(data:img,800,&quot;16:9&quot;) : resizeImage(data:img,500,&quot;1:1&quot;))'/>
       </b:with>
     </b:includable>
     <b:includable id='post-infoComments'>
-      <a class='meta__item meta__space skin-color-text' expr:href='data:post.url fragment "infoComments"'>
+      <a class='meta__item meta__space skin-color-text' expr:href='data:post.url fragment &quot;infoComments&quot;'>
        <i class='far fa-comment'/>
-        <b:if cond='data:skin.vars.config_comments == "disqus"'>
+        <b:if cond='data:skin.vars.config_comments == &quot;disqus&quot;'>
           <span class='disqus-comment-count' expr:data-disqus-url='data:post.url.canonical'/>
-        <b:elseif cond='data:skin.vars.config_comments == "facebook"'/>
+        <b:elseif cond='data:skin.vars.config_comments == &quot;facebook&quot;'/>
           <span class='fb-comments-count' expr:data-href='data:post.url.canonical'/>
         <b:else/>
           <data:post.numComments/>
@@ -2700,8 +3070,8 @@ body#layout #isDark .dropregion.dr_active {
     <b:includable data='post' id='post-related'>
       <b:if cond='!data:blog.isPrivateBlog and data:post.labels'>
       <div class='post-related'>
-        <h3 class="post-heading"><span class='skin-font skin-bg'><data:messages.youMayLikeThesePosts/></span></h3>
-        <div id='wjs-related' class='row wjs-related'>
+        <h3 class='post-heading'><span class='skin-font skin-bg'><data:messages.youMayLikeThesePosts/></span></h3>
+        <div class='row wjs-related' id='wjs-related'>
           <b:class expr:name='data:skin.vars.config_ta_slider'/>
         </div>
       </div>
@@ -2713,16 +3083,16 @@ body#layout #isDark .dropregion.dr_active {
        * Licensed under MIT (github.com/zkreations/wjs-related/blob/master/LICENSE)
        */
        var related = (function(){
-       'use strict';
+       &#39;use strict&#39;;
        var defaults = {
-         id: '<data:post.id/>',
-         homepage: window.location.protocol + '//' + window.location.hostname,
-         image: '<b:eval expr='resizeImage(data:imgDefault,400,"4:3")'/>',
+         id: &#39;<data:post.id/>&#39;,
+         homepage: window.location.protocol + &#39;//&#39; + window.location.hostname,
+         image: &#39;<b:eval expr='resizeImage(data:imgDefault,400,&quot;4:3&quot;)'/>&#39;,
          length: 3,
          snippet: 100,
-         imgSize: 'w400-h300-c',
-         container: document.getElementById('wjs-related'),
-         tags: [<b:loop values='data:post.labels' var='label'>'<data:label.name/>',</b:loop>]
+         imgSize: &#39;w400-h300-c&#39;,
+         container: document.getElementById(&#39;wjs-related&#39;),
+         tags: [<b:loop values='data:post.labels' var='label'>&#39;<data:label.name/>&#39;,</b:loop>]
        };
        //<![CDATA[
        var tags$length = defaults.tags.length;
@@ -2795,8 +3165,8 @@ body#layout #isDark .dropregion.dr_active {
     </b:includable>
     <b:includable id='post-snippet'>
       <b:if cond='data:post.snippet.length != 0'>
-        <p class="card__descripcion card__space">
-          <b:eval expr='data:length == "lg" ? data:post.longSnippet snippet {length: 400} : (data:length == "md" ? data:post.longSnippet snippet {length: 250} : data:post.snippet)'/>
+        <p class='card__descripcion card__space'>
+          <b:eval expr='data:length == &quot;lg&quot; ? data:post.longSnippet snippet {length: 400} : (data:length == &quot;md&quot; ? data:post.longSnippet snippet {length: 250} : data:post.snippet)'/>
         </p>
       </b:if>
     </b:includable>
@@ -2816,9 +3186,8 @@ body#layout #isDark .dropregion.dr_active {
     </b:includable>
     <b:includable id='post-title'>
       <b:if cond='data:post.title.length != 0'>
-        <b:tag class='skin-font' expr:name='data:view.isMultipleItems ? "h2" : "h1"'>
-          <b:class expr:name='data:view.isMultipleItems ? "card__title card__space" : "post__title"'/>
-          <b:class cond='data:view.isPage' name='post__title--page'/>
+        <b:tag class='skin-font' expr:name='data:view.isMultipleItems ? &quot;h2&quot; : &quot;h1&quot;'>
+          <b:class expr:name='data:view.isMultipleItems ? &quot;card__title card__space&quot; : &quot;post__title&quot;'/>
           <b:tag class='skin-color-hover' cond='data:view.isMultipleItems and !data:this.isPortfolio' expr:href='data:post.url' name='a'>
             <data:post.title/>
           </b:tag>
@@ -2827,53 +3196,53 @@ body#layout #isDark .dropregion.dr_active {
     </b:includable>
     <b:includable id='postQuickEdit' var='post'><!--disabled--></b:includable>
     <b:includable id='schema-jsonld'>
-      <script type="application/ld+json">
+      <script type='application/ld+json'>
         {
-          "@context":"http://schema.org",
-          "@type": "BlogPosting",
-          "image": "<b:eval expr='data:post.firstImageUrl ? data:post.firstImageUrl : data:imgDefault'/>",
-          "url": "<data:post.url.canonical/>",
-          "headline": "<data:post.title/>",
-          "dateCreated": "<data:post.timestampISO8601/>",
-          "datePublished": "<data:post.timestampISO8601/>",
-          "dateModified": "<data:post.lastUpdatedISO8601/>",
-          "inLanguage": "<data:blog.locale/>",
-          "isFamilyFriendly": "<b:eval expr='data:blog.adultContent ? "false" : "true"'/>",
-          "author": {
-            "@type": "Person",
-            "name": "<data:post.author/>",
-            "url": "<data:post.authorProfileUrl/>"
+          &quot;@context&quot;:&quot;https://schema.org&quot;,
+          &quot;@type&quot;: &quot;BlogPosting&quot;,
+          &quot;image&quot;: &quot;<b:eval expr='data:post.firstImageUrl ? data:post.firstImageUrl : data:imgDefault'/>&quot;,
+          &quot;url&quot;: &quot;<data:post.url.canonical/>&quot;,
+          &quot;headline&quot;: &quot;<data:post.title/>&quot;,
+          &quot;dateCreated&quot;: &quot;<data:post.timestampISO8601/>&quot;,
+          &quot;datePublished&quot;: &quot;<data:post.timestampISO8601/>&quot;,
+          &quot;dateModified&quot;: &quot;<data:post.lastUpdatedISO8601/>&quot;,
+          &quot;inLanguage&quot;: &quot;<data:blog.locale/>&quot;,
+          &quot;isFamilyFriendly&quot;: &quot;<b:eval expr='data:blog.adultContent ? &quot;false&quot; : &quot;true&quot;'/>&quot;,
+          &quot;author&quot;: {
+            &quot;@type&quot;: &quot;Person&quot;,
+            &quot;name&quot;: &quot;<data:post.author/>&quot;,
+            &quot;url&quot;: &quot;<data:post.authorProfileUrl/>&quot;
           },
-          "publisher": {
-            "@type": "Organization",
-            "name": "<data:blog.title/>",
-            "url": "<data:blog.homepageUrl.canonical/>",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "logo-amp.png",
-              "width":"233",
-              "height":"60"
+          &quot;publisher&quot;: {
+            &quot;@type&quot;: &quot;Organization&quot;,
+            &quot;name&quot;: &quot;<data:blog.title/>&quot;,
+            &quot;url&quot;: &quot;<data:blog.homepageUrl.canonical/>&quot;,
+            &quot;logo&quot;: {
+              &quot;@type&quot;: &quot;ImageObject&quot;,
+              &quot;url&quot;: &quot;logo-amp.png&quot;,
+              &quot;width&quot;:&quot;233&quot;,
+              &quot;height&quot;:&quot;60&quot;
             }
           },
-          "mainEntityOfPage": "true",<b:if cond='data:view.isPost and data:post.labels'>
-          "keywords": [<b:loop index='li' values='data:post.labels' var='i'>"<data:i.name/>"<b:if cond='data:post.labels.length != (data:li + 1)'>,</b:if></b:loop>],
-          "genre":[<b:loop index='li' values='data:post.labels' var='i'>"<data:i.name/>"<b:if cond='data:post.labels.length != (data:li + 1)'>,</b:if></b:loop>],</b:if>
-          "articleBody": "<b:eval expr='data:post.body.jsonEscaped'/>"
+          &quot;mainEntityOfPage&quot;: &quot;true&quot;,<b:if cond='data:view.isPost and data:post.labels'>
+          &quot;keywords&quot;: [<b:loop index='li' values='data:post.labels' var='i'>&quot;<data:i.name/>&quot;<b:if cond='data:post.labels.length != (data:li + 1)'>,</b:if></b:loop>],
+          &quot;genre&quot;:[<b:loop index='li' values='data:post.labels' var='i'>&quot;<data:i.name/>&quot;<b:if cond='data:post.labels.length != (data:li + 1)'>,</b:if></b:loop>],</b:if>
+          &quot;articleBody&quot;: &quot;<b:eval expr='data:post.body.jsonEscaped'/>&quot;
         }
       </script>
     </b:includable>
     <b:includable id='shareButtons'>
       <b:if cond='data:post.sharePostUrl'>
-        <div class="display-flex flex-wrap align-items-center">
-          <b:class expr:name='data:view.isMultipleItems ? "card__space card__share" : "post__share bottom-space"'/>
-          <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: "facebook"})'><i class='fab fa-facebook-f fa-mn fa-fw'/></a>
-          <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: "twitter"})'><i class='fab fa-twitter fa-mn fa-fw'/></a>
-          <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: "googlePlus"})'><i class='fab fa-google-plus-g fa-mn fa-fw'/></a>
-          <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: "pinterest"})'><i class='fab fa-pinterest-p fa-mn fa-fw'/></a>
+        <div class='display-flex flex-wrap align-items-center'>
+          <b:class expr:name='data:view.isMultipleItems ? &quot;card__space card__share&quot; : &quot;post__share bottom-space&quot;'/>
+          <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: &quot;facebook&quot;})'><i class='fab fa-facebook-f fa-mn fa-fw'/></a>
+          <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: &quot;twitter&quot;})'><i class='fab fa-twitter fa-mn fa-fw'/></a>
+          <a class='btn-border wjs-window' expr:href='params(&quot;whatsapp://send&quot;,{text: data:post.url.canonical})'><i class='fab fa-whatsapp fa-mn fa-fw'/></a>
+          <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: &quot;pinterest&quot;})'><i class='fab fa-pinterest-p fa-mn fa-fw'/></a>
           <b:if cond='data:view.isSingleItem'>
-            <a class='btn-border wjs-window' expr:href='params("//www.tumblr.com/widgets/share/tool/preview",{canonicalUrl: data:post.url.canonical, caption: data:post.snippet, posttype: "link", title: data:post.title})'><i class='fab fa-tumblr fa-mn fa-fw'/></a>
+            <a class='btn-border wjs-window' expr:href='params(&quot;//www.tumblr.com/widgets/share/tool/preview&quot;,{canonicalUrl: data:post.url.canonical, caption: data:post.snippet, posttype: &quot;link&quot;, title: data:post.title})'><i class='fab fa-tumblr fa-mn fa-fw'/></a>
             <b:if cond='data:top.showEmailButton'>
-              <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: "email"})'><i class='fas fa-at fa-mn fa-fw'/></a>
+              <a class='btn-border wjs-window' expr:href='params(data:post.sharePostUrl,{target: &quot;email&quot;})'><i class='fas fa-at fa-mn fa-fw'/></a>
             </b:if>
           </b:if>
         </div>
@@ -2889,7 +3258,7 @@ body#layout #isDark .dropregion.dr_active {
         <a expr:href='data:post.commentFormIframeSrc' id='comment-editor-src'/>
         <iframe class='blogger-iframe-colorize blogger-comment-from-post' id='comment-editor' src=''/>
         <data:post.cmtfpIframe/>
-        <script>BLOG_CMT_createIframe("<data:post.appRpcRelayPath/>");</script>
+        <script>BLOG_CMT_createIframe(&quot;<data:post.appRpcRelayPath/>&quot;);</script>
       </div>
     </b:includable>
     <b:includable id='threaded_comment_js' var='post'>
@@ -2911,100 +3280,77 @@ body#layout #isDark .dropregion.dr_active {
 </div>
 <!-- Sidebar -->
 <b:if cond='data:layout.sidebar'>
-<div expr:class='"sidebar " + (data:layout.oppositeBlog ? "skin-left" : "skin-right")'>
+<div expr:class='&quot;sidebar &quot; + (data:layout.oppositeBlog ? &quot;skin-left&quot; : &quot;skin-right&quot;)'>
 <b:class cond='data:layout.sidebar and data:layout.stickySidebar' name='stickySidebar'/>
 <b:section id='sidebar'>
-  <b:widget id='BlogSearch100' locked='false' title='Search' type='BlogSearch' version='1'>
-    <b:includable id='main'>
-      <b:if cond='data:title.length != 0'>
-        <h3 class='widget-title'><data:title/></h3>
-      </b:if>
-      <div class='widget-content'>
-        <form expr:action='data:blog.searchUrl' class="search display-flex" method="get">
-          <b:attr cond='not data:view.isPreview' name='target' value='_top'/>
-          <input autocomplete='off' class='search__input flex-fill form-input' name='q' expr:placeholder='data:messages.searchBlog' spellcheck='false' type='text' expr:value='data:view.isSearch ? data:view.search.query.escaped : ""' required='required'/>
-          <button class='search__button btn skin-bg' type='submit'><i class='fas fa-search fa-fw fa-mn skin-i'/></button>
-        </form>
-      </div>
-    </b:includable>
-  </b:widget>
-  <b:widget id='FeaturedPost100' locked='false' title='Featured post' type='FeaturedPost' version='1'>
+  <b:widget id='HTML2' locked='false' title='Twitter' type='HTML'>
     <b:widget-settings>
-      <b:widget-setting name='useMostRecentPost'>true</b:widget-setting>
+      <b:widget-setting name='content'>&lt;a class=&quot;twitter-timeline&quot; data-lang=&quot;es&quot; data-height=&quot;400&quot; data-dnt=&quot;true&quot; data-theme=&quot;dark&quot; href=&quot;https://twitter.com/JntaiXYZ?ref_src=twsrc%5Etfw&quot;&gt;&lt;/a&gt;
+&lt;script async src=&quot;https://platform.twitter.com/widgets.js&quot; charset=&quot;utf-8&quot;&gt;&lt;/script&gt;</b:widget-setting>
     </b:widget-settings>
     <b:includable id='main'>
-      <b:if cond='data:title.length != 0'>
-        <h3 class='widget-title'><data:title/></h3>
-      </b:if>
-      <div class='widget-content'>
-        <b:include name='content'/>
-      </div>
-    </b:includable>
-    <b:includable id='content'>
-      <div class='card-featured'>
-        <div class='card__content'>
-          <a class='card__image' expr:href='data:postUrl'>
-            <i class='card__icon skin-bg fas fa-star fa-mn skin-i'/>
-            <b:include name='featured-image'/>
-          </a>
-          <div class='card__data'>
-            <b:include name='featured-title'/>
-            <b:include name='featured-summary'/>
-            <b:include name='featured-share'/>
-          </div>
-        </div>
-      </div>
-    </b:includable>
-    <b:includable id='featured-image'>
-      <b:with value='data:postFirstImage ? data:postFirstImage : data:imgDefault' var='img'>
-        <img expr:alt='data:postTitle' expr:src='data:skin.vars.config_card_ratio ? resizeImage(data:img,300,"16:9") : resizeImage(data:img,300)'/>
-      </b:with>
-    </b:includable>
-    <b:includable id='featured-title'>
-      <b:if cond='data:showPostTitle and data:postTitle.length != 0'>
-        <h2 class='card__title card__space skin-font'>
-          <a class='skin-color-hover' expr:href='data:postUrl'><data:postTitle/></a>
-        </h2>
-      </b:if>
-    </b:includable>
-    <b:includable id='featured-summary'>
-      <b:if cond='data:showSnippet and data:postSummary.length != 0'>
-        <p class='card__descripcion card__space'><data:postSummary/></p>
-      </b:if>
-    </b:includable>
-    <b:includable id='featured-share'>
-      <b:if cond='!data:blog.isPrivateBlog'>
-        <div class="card__space card__share display-flex flex-wrap align-items-center justify-content-center">
-          <a class='btn-border wjs-window' expr:href='params(data:sharePostUrl,{target: "facebook"})'><i class='fab fa-facebook-f fa-mn fa-fw'/></a>
-          <a class='btn-border wjs-window' expr:href='params(data:sharePostUrl,{target: "twitter"})'><i class='fab fa-twitter fa-mn fa-fw'/></a>
-          <a class='btn-border wjs-window' expr:href='params(data:sharePostUrl,{target: "googlePlus"})'><i class='fab fa-google-plus-g fa-mn fa-fw'/></a>
-        </div>
-      </b:if>
-    </b:includable>
+  <!-- only display title if it's non-empty -->
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2 class='title'><data:title/></h2>
+  </b:if>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+
+  <b:include name='quickedit'/>
+</b:includable>
   </b:widget>
-  <b:widget id='Label100' locked='false' title='Labels' type='Label' version='1'>
+  <b:widget id='Label100' locked='false' title='Etiquetas' type='Label' version='1'>
     <b:widget-settings>
+      <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
       <b:widget-setting name='display'>CLOUD</b:widget-setting>
+      <b:widget-setting name='selectedLabelsList'>Ahegao,Escolar,Harem,Incesto,Lolicon,Milf,Morena,Netorare,Netorase,Romance,Sumisas,Tetona,Virgenes</b:widget-setting>
+      <b:widget-setting name='showType'>USER_SELECTED</b:widget-setting>
+      <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
     </b:widget-settings>
     <b:includable id='main'>
       <b:if cond='data:title.length != 0'>
         <h3 class='widget-title'><data:title/></h3>
       </b:if>
       <div class='widget-content'>
-        <div class="tagsList display-flex align-items-start flex-wrap">
-          <b:class cond='data:display == "list"' name='tagsList--list'/>
+        <div class='tagsList display-flex align-items-start flex-wrap'>
+          <b:class cond='data:display == &quot;list&quot;' name='tagsList--list'/>
           <b:loop values='data:labels' var='i'>
             <a class='tagsList__link btn' expr:href='data:i.url'>
               <b:class cond='data:view.url == data:i.url' name='here'/>
               <data:i.name/>
               <b:if cond='data:showFreqNumbers'>
-                <span class='tags-list__num'><data:i.count/></span>
+                <span class='tags-list__num'> [<data:i.count/>]</span>
               </b:if>
             </a>
           </b:loop>
         </div>
       </div>
     </b:includable>
+  </b:widget>
+  <b:widget id='Stats1' locked='false' title='Vistas de JntaiXYZ' type='Stats'>
+    <b:widget-settings>
+      <b:widget-setting name='showGraphicalCounter'>true</b:widget-setting>
+      <b:widget-setting name='showAnimatedCounter'>true</b:widget-setting>
+      <b:widget-setting name='showSparkline'>false</b:widget-setting>
+      <b:widget-setting name='sparklineStyle'>BLACK_TRANSPARENT</b:widget-setting>
+      <b:widget-setting name='timeRange'>ALL_TIME</b:widget-setting>
+    </b:widget-settings>
+    <b:includable id='main'>
+  <b:if cond='data:title != &quot;&quot;'><h2><data:title/></h2></b:if>
+  <div class='widget-content'>
+    <!-- Content is going to be visible when data will be fetched from server. -->
+    <div expr:id='data:widget.instanceId + &quot;_content&quot;' style='display: none;'>
+      <!-- Counter and image will be injected later via AJAX call. -->
+      <b:if cond='data:showSparkline'>
+        <img alt='Sparkline' expr:id='data:widget.instanceId + &quot;_sparkline&quot;' height='30' width='75'/>
+      </b:if>
+      <span expr:class='&quot;counter-wrapper &quot; + (data:showGraphicalCounter ? &quot;graph-counter-wrapper&quot; : &quot;text-counter-wrapper&quot;)' expr:id='data:widget.instanceId + &quot;_totalCount&quot;'>
+      </span>
+      <b:include name='quickedit'/>
+    </div>
+  </div>
+</b:includable>
   </b:widget>
 </b:section>
 </div>
@@ -3018,14 +3364,23 @@ body#layout #isDark .dropregion.dr_active {
 <b:class cond='data:skin.vars.config_dark_footer' name='is-dark'/>
 <div class='footer__primary'>
 <b:tag class='container' cond='data:layout.wide' name='div'>
-<b:section id='footer-copyright' maxwidgets='2' class='clearfix skin-box display-flex align-items-center justify-content-between flex-row-md flex-column'>
+<b:section class='clearfix skin-box display-flex align-items-center justify-content-between flex-row-md flex-column' id='footer-copyright' maxwidgets='2'>
   <b:widget id='LinkList100' locked='true' title='Social Networks' type='LinkList' version='1'>
+    <b:widget-settings>
+      <b:widget-setting name='sorting'>NONE</b:widget-setting>
+      <b:widget-setting name='text-1'>fab fa-facebook-f</b:widget-setting>
+      <b:widget-setting name='link-1'>https://fb.com/JntaiXYZ</b:widget-setting>
+      <b:widget-setting name='text-0'>fab fa-paypal</b:widget-setting>
+      <b:widget-setting name='link-2'>https://twitter.com/JntaiXYZ</b:widget-setting>
+      <b:widget-setting name='link-0'>https://www.paypal.me/Rykrdo</b:widget-setting>
+      <b:widget-setting name='text-2'>fab fa-twitter</b:widget-setting>
+    </b:widget-settings>
     <b:includable id='main'>
-      <div class="footer__social">
+      <div class='footer__social'>
         <nav class='footer__social-list display-flex align-items-center justify-content-start-md justify-content-center flex-wrap'>
           <b:loop values='data:links' var='i'>
             <a class='display-flex align-items-center skin-color-hover' expr:href='data:i.target' rel='nofollow' target='_blank'>
-              <i expr:class='data:i.name + " fa-mn"'/>
+              <i expr:class='data:i.name + &quot; fa-mn&quot;'/>
             </a>
           </b:loop>
         </nav>
@@ -3033,13 +3388,16 @@ body#layout #isDark .dropregion.dr_active {
       <!-- .end__social-list -->
     </b:includable>
   </b:widget>
-  <b:widget id='Text100' locked='true' title='Copyright' type='Text'>
+  <b:widget id='Text100' locked='true' title='Copyright' type='Text' version='1'>
+    <b:widget-settings>
+      <b:widget-setting name='content'><![CDATA[<br />]]></b:widget-setting>
+    </b:widget-settings>
     <b:includable id='main'>
       <div class='footer__copy'>
-        <span class='copy__date skin-font'><data:blog.title/> 2018</span>
-        <b:comment>This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License: http://creativecommons.org/licenses/by-nc/4.0/</b:comment>
+        <span class='copy__date skin-font'>JntaiXYZ</span>
+        <b:comment>This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License: https://creativecommons.org/licenses/by-nc/4.0/</b:comment>
         <div class='copy__attribution'>
-          Created by <a class='skin-color-hover' href='//zkreations.com' property='cc:attributionName' rel='cc:attributionURL,nofollow' target='_blank'>zkreations</a> &amp; <a class='skin-color-hover' expr:href='data:blog.bloggerUrl' rel='nofollow' target='_blank'>Blogger</a> <data:content/>
+          Plantilla versión <a class='skin-color-hover' href='//shop.zkreations.com/2019/01/anime-xml.html' property='cc:attributionName' rel='cc:attributionURL,nofollow' target='_blank'>PRO.xml</a> - Creada por <a class='skin-color-hover' href='//zkreations.com' property='cc:attributionName' rel='cc:attributionURL,nofollow' target='_blank'>zkreations</a> &amp; <a class='skin-color-hover' expr:href='data:blog.bloggerUrl' rel='nofollow' target='_blank'>Blogger</a> <data:content/>
         </div>
       </div>
     </b:includable>
@@ -3053,88 +3411,31 @@ body#layout #isDark .dropregion.dr_active {
 <b:tag class='container' cond='data:layout.wide' name='div'>
 <div class='skin-box'>
 <div class='footer__items row clearfix'>
-<b:tag cond='data:layout.mode' name='div' id='three-column'>
-<b:section id='footer-case-1' class='footer__case col-4-md'>
-  <b:widget id='Text101' locked='false' title='About us' type='Text'>
-    <b:includable id='main'>
-      <b:if cond='data:title.length != 0'>
-        <h3 class='widget-title'><data:title/></h3>
-      </b:if>
-      <div class='widget-content'>
-        <b:if cond='data:content.length != 0'>
-          <data:content/>
-        <b:else/>
-          <div class='alert'>
-            <strong><data:widget.type/></strong>: <data:messages.theresNothingHere/>
-          </div>
-        </b:if>
-      </div>
-    </b:includable>
-  </b:widget>
-</b:section>
+<b:tag cond='data:layout.mode' id='three-column' name='div'>
+<b:section class='footer__case col-4-md' id='footer-case-1'/>
 </b:tag>
-<b:tag cond='data:layout.mode' name='div' id='three-column'>
-<b:section id='footer-case-2' class='footer__case col-4-md'>
-  <b:widget id='PopularPosts101' locked='false' title='Popular Posts' type='PopularPosts'>
+<b:tag cond='data:layout.mode' id='three-column' name='div'>
+<b:section class='footer__case col-4-md' id='footer-case-2'>
+  <b:widget id='HTML3' locked='false' title='' type='HTML'>
     <b:widget-settings>
-      <b:widget-setting name='numItemsToShow'>4</b:widget-setting>
-      <b:widget-setting name='showThumbnails'>true</b:widget-setting>
-      <b:widget-setting name='showSnippets'>true</b:widget-setting>
-      <b:widget-setting name='timeRange'>ALL_TIME</b:widget-setting>
+      <b:widget-setting name='content'><![CDATA[<center><font color="#fff">Hecho con mucho amor</font> <span style="color: #bb1919"><strong class='love'><i class="fas fa-heart"></i></strong></span><font color="#fff"> - JntaiXYZ 2019</font></center>]]></b:widget-setting>
     </b:widget-settings>
     <b:includable id='main'>
-      <b:if cond='data:title.length != 0'>
-        <h3 class='widget-title'><data:title/></h3>
-      </b:if>
-      <div class='widget-content'>
-        <b:if cond='data:posts.empty'>
-          <div class='alert'>
-            <strong><data:widget.type/></strong>: <data:messages.theresNothingHere/>
-          </div>
-        <b:else/>
-          <div class='hotPosts'>
-            <b:loop values='data:posts' var='i'>
-              <div class='hotPosts__content display-flex align-items-start'>
-                <b:if cond='data:showThumbnails'>
-                  <a class='hotPosts__image flex-none' expr:href='data:i.href'>
-                    <img expr:src='data:i.featuredImage.isResizable ? resizeImage(data:i.featuredImage, 80, "1:1") : data:i.thumbnail' expr:alt='data:i.title'/>
-                  </a>
-                </b:if>
-                <div class='hotPosts__data'>
-                  <h2 class='hotPosts__title'>
-                    <a class='skin-color-hover' expr:href='data:i.href'><data:i.title/></a>
-                  </h2>
-                  <b:if cond='data:showSnippets'>
-                    <p class='hotPosts__snippet'><b:eval expr='data:i.snippet snippet {length: 60}'/></p>
-                  </b:if>
-                </div>
-              </div>
-            </b:loop>
-          </div>
-        </b:if>
-      </div>
-    </b:includable>
+  <!-- only display title if it's non-empty -->
+  <b:if cond='data:title != &quot;&quot;'>
+    <h2 class='title'><data:title/></h2>
+  </b:if>
+  <div class='widget-content'>
+    <data:content/>
+  </div>
+
+  <b:include name='quickedit'/>
+</b:includable>
   </b:widget>
 </b:section>
 </b:tag>
-<b:tag cond='data:layout.mode' name='div' id='three-column'>
-<b:section id='footer-case-3' class='footer__case col-4-md'>
-  <b:widget id='FollowByEmail100' locked='false' title='Newsletter' type='FollowByEmail'>
-    <b:includable id='main'>
-      <b:if cond='data:title.length != 0'>
-        <h3 class='widget-title'><data:title/></h3>
-      </b:if>
-      <div class='widget-content'>
-        <form class='newsletter display-flex flex-column' action='https://feedburner.google.com/fb/a/mailverify' expr:onsubmit='"window.open(\"https://feedburner.google.com/fb/a/mailverify?uri=" + data:feedPath + " \", \"popupwindow\", \"scrollbars=yes,width=550,height=520,left=\"+(screen.width/2-275)+\",top=\"+(screen.height/2-260));return true"' method='post' target='popupwindow'>
-          <input class='newsletter__input form-input' autocomplete='off' spellcheck='false' name='email' expr:placeholder='data:messages.emailAddress' type='text'/>
-          <button class='newsletter__button btn skin-bg' type='submit'><data:messages.subscribe/></button>
-          <input expr:value='data:feedPath' name='uri' type='hidden'/>
-          <input name='loc' type='hidden' expr:value='data:blog.locale.language'/>
-        </form>
-      </div>
-    </b:includable>
-  </b:widget>
-</b:section>
+<b:tag cond='data:layout.mode' id='three-column' name='div'>
+<b:section class='footer__case col-4-md' id='footer-case-3'/>
 </b:tag>
 </div><!-- .footer__items .row -->
 </div>
@@ -3143,7 +3444,7 @@ body#layout #isDark .dropregion.dr_active {
 </b:if>
 
 
-<b:section id='footer-links' class='footer__links' maxwidgets='1'>
+<b:section class='footer__links' id='footer-links' maxwidgets='1'>
   <b:widget id='LinkList101' locked='true' title='Footer Links' type='LinkList' version='1'>
     <b:includable id='main'>
       <b:tag class='container' cond='data:layout.wide' name='div'>
@@ -3173,7 +3474,7 @@ body#layout #isDark .dropregion.dr_active {
 <script src='https://cdn.jsdelivr.net/gh/zkreations/whale@1.5.4/dist/js/whale.min.js'/>
 
 <!-- Font Awesome 5 -->
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"/>
+<link href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' rel='stylesheet'/>
       
 <!-- Tiny Slider 2 -->
 <b:if cond='data:layout.general and data:view.isHomepage'>
@@ -3183,7 +3484,7 @@ body#layout #isDark .dropregion.dr_active {
 var slider = tns({
     container: '.slider__container', autoplayButtonOutput: false,
     arrowKeys: false, nextButton: '.controls__next', prevButton: '.controls__prev',
-    items: 2, responsive: {576: {items: 3},768: {items: 4},992: {items: 5}},
+    items: 2, responsive: {576: {items: 3},768: {items: 4},992: {items: 6}},
     lazyload: true, nav: false,
     slideBy: 1,
     autoplay: true,
@@ -3204,5 +3505,43 @@ var slider = tns({
 
 <!-- Google Analytics -->
 <b:include data='blog' name='google-analytics'/>
+<!-- HTML-->
+<button class='scrollToTop' id='scrollToTop'>
+   <svg height='35' viewBox='0 0 24 24' width='35' xmlns='https://www.w3.org/2000/svg'>
+      <path d='M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z'/>
+      <path d='M0 0h24v24H0z' fill='none'/>
+   </svg>
+</button>
+
+<!-- Javascript -->
+<script>//<![CDATA[
+// Plugin: scrollToTop
+// by zkreations.com | Daniel Abel
+var scrollToTop = (function() {
+    var showButton = 600,
+        scrollSpeed = 1000; 
+    function scrollTop(b) {
+        function a(d) {
+            c += Math.PI / (b / (d - e));
+            c >= Math.PI && window.scrollTo(0, 0);
+            0 !== window.scrollY && (window.scrollTo(0, Math.round(scrollTime + scrollTime * Math.cos(c))), e = d, window.requestAnimationFrame(a))
+        }
+        var scrollTime = window.scrollY / 2,
+            c = 0,
+            e = performance.now();
+        window.requestAnimationFrame(a)
+    }
+    var scrollPosition = window.scrollY,
+        scrollButton = document.getElementById("scrollToTop");
+    window.addEventListener("scroll", function() {
+
+        scrollPosition = window.scrollY;
+        showButton < scrollPosition ? scrollButton.classList.add("visible") : scrollButton.classList.remove("visible")
+    });
+    scrollButton.onclick = function() {
+        scrollTop(scrollSpeed)
+    }
+})();
+//]]></script>
 </body>
 </html>
